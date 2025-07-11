@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Créditos - Fya Social Capital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .header {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: #1e40af;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+
+        .company-info h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .company-info p {
+            color: #64748b;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .system-info {
+            text-align: right;
+        }
+
+        .system-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+
+        .system-subtitle {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .nav-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8fafc;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-right: 1px solid #e2e8f0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-tab:last-child {
+            border-right: none;
+        }
+
+        .nav-tab.active {
+            background: #1e40af;
+            color: #ffffff;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .content-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        .panel-header {
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .panel-description {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .required::after {
+            content: "*";
+            color: #dc2626;
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .form-group input:invalid {
+            border-color: #dc2626;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #1e40af;
+            color: #ffffff;
+            border: 1px solid #1e40af;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .filters-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .table-container {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .table-header {
+            background: #f8fafc;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .table-count {
+            background: #e0e7ff;
+            color: #1e40af;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .credits-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .credits-table th {
+            background: #f8fafc;
+            color: #374151;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .credits-table th:hover {
+            background: #e2e8f0;
+            cursor: pointer;
+        }
+
+        .credits-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.875rem;
+        }
+
+        .credits-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .credits-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount {
+            font-weight: 600;
+            color: #059669;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .date {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.875rem;
+            display: none;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            color: #166534;
+            border-left-color: #22c55e;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border-left-color: #ef4444;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #1e40af;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .metadata-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metadata-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+
+        .metadata-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .system-info {
+                text-align: center;
+            }
+            
+            .form-grid,
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .form-actions,
+            .filter-actions {
+                flex-direction: column;
+            }
+            
+            .metadata {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metadata {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+                            <path d="M7 6v12h2V6H7zm4 0v12h2V6h-2zm4 0v12h2V6h-2z"/>
+                        </svg>
+                    </div>
+                    <div class="company-info">
+                        <h1>FYA SOCIAL CAPITAL</h1>
+                        <p>SOLUCIONES FINANCIERAS CORPORATIVAS</p>
+                    </div>
+                </div>
+                <div class="system-info">
+                    <div class="system-title">Sistema de Gestión de Créditos</div>
+                    <div class="system-subtitle">Versión 1.0 • Proceso: Evaluación Técnica</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showPanel('register')">
+                    Registro de Créditos
+                </button>
+                <button class="nav-tab" onclick="showPanel('query')">
+                    Consulta y Reportes
+                </button>
+            </div>
+        </div>
+
+        <div id="register-panel" class="content-panel active">
+            <div class="panel-header">
+                <h2 class="panel-title">Registro de Nuevo Crédito</h2>
+                <p class="panel-description">Complete la información requerida para registrar un nuevo crédito en el sistema. Todos los campos marcados con (*) son obligatorios.</p>
+            </div>
+            
+            <div class="alert alert-success" id="success-msg">
+                <strong>Registro Exitoso:</strong> El crédito ha sido registrado correctamente. Se ha enviado una notificación automática por correo electrónico.
+            </div>
+            
+            <div class="alert alert-error" id="error-msg">
+                <strong>Error en el Registro:</strong> No se pudo completar el registro. Por favor, verifique los datos ingresados e intente nuevamente.
+            </div>
+
+            <form id="credit-form">
+                <div class="form-section">
+                    <h3 class="section-title">Información del Cliente</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="client-name" class="required">Nombre Completo del Cliente</label>
+                            <input type="text" id="client-name" name="clientName" required 
+                                   placeholder="Ingrese el nombre completo">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="client-id" class="required">Número de Identificación</label>
+                            <input type="text" id="client-id" name="clientId" required 
+                                   placeholder="Cédula, NIT o documento de identidad">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">Detalles del Crédito</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="credit-amount" class="required">Valor del Crédito (COP)</label>
+                            <input type="number" id="credit-amount" name="creditAmount" required 
+                                   min="100000" step="1000" placeholder="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest-rate" class="required">Tasa de Interés (%)</label>
+                            <input type="number" id="interest-rate" name="interestRate" required 
+                                   min="0" max="50" step="0.01" placeholder="0.00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="term-months" class="required">Plazo (Meses)</label>
+                            <input type="number" id="term-months" name="termMonths" required 
+                                   min="1" max="360" placeholder="12">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">Información Comercial</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="sales-rep" class="required">Ejecutivo Comercial</label>
+                            <select id="sales-rep" name="salesRep" required>
+                                <option value="">Seleccione un ejecutivo comercial</option>
+                                <option value="Juan Carlos Martínez">Juan Carlos Martínez</option>
+                                <option value="María Elena González">María Elena González</option>
+                                <option value="Carlos Alberto Rodríguez">Carlos Alberto Rodríguez</option>
+                                <option value="Ana Patricia Jiménez">Ana Patricia Jiménez</option>
+                                <option value="Pedro Alejandro Sánchez">Pedro Alejandro Sánchez</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                        Limpiar Formulario
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                        Registrar Crédito
+                    </button>
+                </div>
+            </form>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p><strong>Procesando Registro...</strong><br>Validando información y enviando notificaciones</p>
+            </div>
+        </div>
+
+        <div id="query-panel" class="content-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Consulta y Reportes de Créditos</h2>
+                <p class="panel-description">Visualice, filtre y ordene todos los créditos registrados en el sistema. Utilice los filtros para realizar búsquedas específicas.</p>
+            </div>
+
+            <div class="metadata">
+                <div class="metadata-card">
+                    <div class="metadata-value" id="total-credits">0</div>
+                    <div class="metadata-label">Total Créditos</div>
+                </div>
+                <div class="metadata-card">
+                    <div class="metadata-value" id="total-amount">$0</div>
+                    <div class="metadata-label">Valor Total</div>
+                </div>
+                <div class="metadata-card">
+                    <div class="metadata-value" id="avg-amount">$0</div>
+                    <div class="metadata-label">Promedio por Crédito</div>
+                </div>
+                <div class="metadata-card">
+                    <div class="metadata-value" id="active-credits">0</div>
+                    <div class="metadata-label">Créditos Activos</div>
+                </div>
+            </div>
+            
+            <div class="filters-section">
+                <h3 class="section-title">Filtros de Búsqueda</h3>
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label for="filter-client">Filtrar por Cliente</label>
+                        <input type="text" id="filter-client" placeholder="Nombre del cliente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="filter-id">Filtrar por Identificación</label>
+                        <input type="text" id="filter-id" placeholder="Número de documento">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="filter-sales-rep">Filtrar por Ejecutivo</label>
+                        <select id="filter-sales-rep">
+                            <option value="">Todos los ejecutivos</option>
+                            <option value="Juan Carlos Martínez">Juan Carlos Martínez</option>
+                            <option value="María Elena González">María Elena González</option>
+                            <option value="Carlos Alberto Rodríguez">Carlos Alberto Rodríguez</option>
+                            <option value="Ana Patricia Jiménez">Ana Patricia Jiménez</option>
+                            <option value="Pedro Alejandro Sánchez">Pedro Alejandro Sánchez</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sort-by">Ordenar por</label>
+                        <select id="sort-by">
+                            <option value="date-desc">Fecha (Más reciente)</option>
+                            <option value="date-asc">Fecha (Más antigua)</option>
+                            <option value="amount-desc">Monto (Mayor a menor)</option>
+                            <option value="amount-asc">Monto (Menor a mayor)</option>
+                            <option value="client-asc">Cliente (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-secondary" onclick="clearFilters()">
+                        Limpiar Filtros
+                    </button>
+                    <button class="btn btn-primary" onclick="applyFilters()">
+                        Aplicar Filtros
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="table-title">Registro de Créditos</div>
+                    <div class="table-count" id="results-count">0 registros</div>
+                </div>
+                
+                <table class="credits-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortBy('client')">Cliente</th>
+                            <th onclick="sortBy('id')">Identificación</th>
+                            <th onclick="sortBy('amount')">Valor del Crédito</th>
+                            <th onclick="sortBy('rate')">Tasa (%)</th>
+                            <th onclick="sortBy('term')">Plazo</th>
+                            <th onclick="sortBy('salesRep')">Ejecutivo Comercial</th>
+                            <th onclick="sortBy('date')">Fecha de Registro</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="credits-tbody">
+                        <!-- Los datos se llenarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-state-icon">📋</div>
+                <h3>No hay créditos registrados</h3>
+                <p>No se encontraron registros que coincidan con los criterios de búsqueda.</p>
+                <button class="btn btn-primary" onclick="showPanel('register')" style="margin-top: 16px;">
+                    Registrar Primer Crédito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo basados en el PDF
+        let credits = [
+            {
+                id: 1,
+                clientName: "Pepito Pérez",
+                clientId: "1012345678",
+                amount: 7800000,
+                interestRate: 2.00,
+                termMonths: 10,
+                salesRep: "Juan Carlos Martínez",
+                date: "2025-07-01",
+                status: "active"
+            },
+            {
+                id: 2,
+                clientName: "María Pérez",
+                clientId: "1087654321",
+                amount: 12500000,
+                interestRate: 2.00,
+                termMonths: 5,
+                salesRep: "María Elena González",
+                date: "2025-07-02",
+                status: "active"
+            },
+            {
+                id: 3,
+                clientName: "Antonio Rodríguez",
+                clientId: "1011223344",
+                amount: 10312673,
+                interestRate: 2.00,
+                termMonths: 5,
+                salesRep: "Carlos Alberto Rodríguez",
+                date: "2025-07-03",
+                status: "pending"
+            },
+            {
+                id: 4,
+                clientName: "Giselle López",
+                clientId: "1044332211",
+                amount: 8628510,
+                interestRate: 2.00,
+                termMonths: 12,
+                salesRep: "Ana Patricia Jiménez",
+                date: "2025-07-04",
+                status: "active"
+            },
+            {
+                id: 5,
+                clientName: "Martha Pérez",
+                clientId: "1055667788",
+                amount: 5889085,
+                interestRate: 2.00,
+                termMonths: 24,
+                salesRep: "Pedro Alejandro Sánchez",
+                date: "2025-07-05",
+                status: "active"
+            }
+        ];
+
+        // Función para cambiar entre paneles
+        function showPanel(panelName) {
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(panelName + '-panel').classList.add('active');
+            event.target.classList.add('active');
+            
+            if (panelName === 'query') {
+                updateMetadata();
+                renderCreditsTable();
+            }
+        }
+
+        // Función para limpiar formulario
+        function clearForm() {
+            document.getElementById('credit-form').reset();
+            hideMessages();
+        }
+
+        // Función para limpiar filtros
+        function clearFilters() {
+            document.getElementById('filter-client').value = '';
+            document.getElementById('filter-id').value = '';
+            document.getElementById('filter-sales-rep').value = '';
+            document.getElementById('sort-by').value = 'date-desc';
+            applyFilters();
+        }
+
+        // Función para ocultar mensajes
+        function hideMessages() {
+            document.getElementById('success-msg').style.display = 'none';
+            document.getElementById('error-msg').style.display = 'none';
+        }
+
+        // Función para mostrar loading
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submit-btn').disabled = true;
+        }
+
+        // Función para ocultar loading
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('submit-btn').disabled = false;
+        }
+
+        // Función para formatear moneda
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Función para formatear fecha
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit'
+            });
+        }
+
+        // Función para actualizar metadata
+        function updateMetadata() {
+            const totalCredits = credits.length;
+            const totalAmount = credits.reduce((sum, credit) => sum + credit.amount, 0);
+            const avgAmount = totalCredits > 0 ? totalAmount / totalCredits : 0;
+            const activeCredits = credits.filter(credit => credit.status === 'active').length;
+
+            document.getElementById('total-credits').textContent = totalCredits.toLocaleString();
+            document.getElementById('total-amount').textContent = formatCurrency(totalAmount);
+            document.getElementById('avg-amount').textContent = formatCurrency(avgAmount);
+            document.getElementById('active-credits').textContent = activeCredits.toLocaleString();
+        }
+
+        // Función para renderizar tabla de créditos
+        function renderCreditsTable(filteredCredits = credits) {
+            const tbody = document.getElementById('credits-tbody');
+            const emptyState = document.getElementById('empty-state');
+            const resultsCount = document.getElementById('results-count');
+            
+            resultsCount.textContent = `${filteredCredits.length} registro${filteredCredits.length !== 1 ? 's' : ''}`;
+            
+            if (filteredCredits.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                document.querySelector('.table-container').style.display = 'none';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            document.querySelector('.table-container').style.display = 'block';
+            
+            tbody.innerHTML = filteredCredits.map(credit => `
+                <tr>
+                    <td><strong>${credit.clientName}</strong></td>
+                    <td>${credit.clientId}</td>
+                    <td class="amount">${formatCurrency(credit.amount)}</td>
+                    <td>${credit.interestRate.toFixed(2)}%</td>
+                    <td>${credit.termMonths} meses</td>
+                    <td>${credit.salesRep}</td>
+                    <td class="date">${formatDate(credit.date)}</td>
+                    <td>
+                        <span class="status-badge ${credit.status === 'active' ? 'status-active' : 'status-pending'}">
+                            ${credit.status === 'active' ? 'Activo' : 'Pendiente'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Función para aplicar filtros
+        function applyFilters() {
+            const clientFilter = document.getElementById('filter-client').value.toLowerCase();
+            const idFilter = document.getElementById('filter-id').value.toLowerCase();
+            const salesRepFilter = document.getElementById('filter-sales-rep').value;
+            const sortBy = document.getElementById('sort-by').value;
+            
+            let filteredCredits = credits.filter(credit => {
+                return (
+                    (!clientFilter || credit.clientName.toLowerCase().includes(clientFilter)) &&
+                    (!idFilter || credit.clientId.includes(idFilter)) &&
+                    (!salesRepFilter || credit.salesRep === salesRepFilter)
+                );
+            });
+            
+            // Ordenar
+            filteredCredits.sort((a, b) => {
+                switch(sortBy) {
+                    case 'date-desc':
+                        return new Date(b.date) - new Date(a.date);
+                    case 'date-asc':
+                        return new Date(a.date) - new Date(b.date);
+                    case 'amount-desc':
+                        return b.amount - a.amount;
+                    case 'amount-asc':
+                        return a.amount - b.amount;
+                    case 'client-asc':
+                        return a.clientName.localeCompare(b.clientName);
+                    default:
+                        return 0;
+                }
+            });
+            
+            renderCreditsTable(filteredCredits);
+        }
+
+        // Función para ordenar por columna
+        function sortBy(column) {
+            const sortSelect = document.getElementById('sort-by');
+            const currentSort = sortSelect.value;
+            
+            switch(column) {
+                case 'client':
+                    sortSelect.value = 'client-asc';
+                    break;
+                case 'amount':
+                    sortSelect.value = currentSort === 'amount-desc' ? 'amount-asc' : 'amount-desc';
+                    break;
+                case 'date':
+                    sortSelect.value = currentSort === 'date-desc' ? 'date-asc' : 'date-desc';
+                    break;
+            }
+            
+            applyFilters();
+        }
+
+        // Función para validar formulario
+        function validateForm(formData) {
+            const errors = [];
+            
+            if (!formData.get('clientName').trim()) {
+                errors.push('El nombre del cliente es requerido');
+            }
+            
+            if (!formData.get('clientId').trim()) {
+                errors.push('El número de identificación es requerido');
+            }
+            
+            const amount = parseFloat(formData.get('creditAmount'));
+            if (!amount || amount < 100000) {
+                errors.push('El valor del crédito debe ser mayor a $100,000');
+            }
+            
+            const rate = parseFloat(formData.get('interestRate'));
+            if (!rate || rate < 0 || rate > 50) {
+                errors.push('La tasa de interés debe estar entre 0% y 50%');
+            }
+            
+            const term = parseInt(formData.get('termMonths'));
+            if (!term || term < 1 || term > 360) {
+                errors.push('El plazo debe estar entre 1 y 360 meses');
+            }
+            
+            if (!formData.get('salesRep')) {
+                errors.push('Debe seleccionar un ejecutivo comercial');
+            }
+            
+            return errors;
+        }
+
+        // Manejo del formulario
+        document.getElementById('credit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            hideMessages();
+            
+            const formData = new FormData(this);
+            const errors = validateForm(formData);
+            
+            if (errors.length > 0) {
+                const errorMsg = document.getElementById('error-msg');
+                errorMsg.innerHTML = '<strong>Errores de Validación:</strong><ul>' + 
+                    errors.map(error => `<li>${error}</li>`).join('') + '</ul>';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            showLoading();
+            
+            // Simular procesamiento asíncrono
+            setTimeout(() => {
+                const newCredit = {
+                    id: credits.length + 1,
+                    clientName: formData.get('clientName').trim(),
+                    clientId: formData.get('clientId').trim(),
+                    amount: parseFloat(formData.get('creditAmount')),
+                    interestRate: parseFloat(formData.get('interestRate')),
+                    termMonths: parseInt(formData.get('termMonths')),
+                    salesRep: formData.get('salesRep'),
+                    date: new Date().toISOString().split('T')[0],
+                    status: 'pending'
+                };
+                
+                credits.push(newCredit);
+                
+                hideLoading();
+                document.getElementById('success-msg').style.display = 'block';
+                this.reset();
+                
+                // Simular envío de correo RPA
+                console.log('🔄 RPA - Enviando correo automático a fyasocialcapital@gmail.com');
+                console.log('📧 Datos del correo:', {
+                    clientName: newCredit.clientName,
+                    amount: formatCurrency(newCredit.amount),
+                    salesRep: newCredit.salesRep,
+                    date: formatDate(newCredit.date)
+                });
+                
+                // Scroll al mensaje de éxito
+                document.getElementById('success-msg').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                
+            }, 1500);
+        });
+
+        // Event listeners para filtros en tiempo real
+        document.getElementById('filter-client').addEventListener('input', applyFilters);
+        document.getElementById('filter-id').addEventListener('input', applyFilters);
+        document.getElementById('filter-sales-rep').addEventListener('change', applyFilters);
+        document.getElementById('sort-by').addEventListener('change', applyFilters);
+
+        // Función para formatear números mientras se escriben
+        document.getElementById('credit-amount').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value) {
+                e.target.value = parseInt(value).toLocaleString('es-CO');
+            }
+        });
+
+        document.getElementById('credit-amount').addEventListener('blur', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            updateMetadata();
+            renderCreditsTable();
+            
+            // Precargar datos de ejemplo para demostración
+            console.log('💼 Sistema de Gestión de Créditos - FYA Social Capital');
+            console.log('📊 Datos de ejemplo cargados:', credits.length, 'créditos');
+            console.log('🔧 Funcionalidades activas: Registro, Consulta, Filtros, RPA Email');
+        });
+    </script>
+</body>
+</html>

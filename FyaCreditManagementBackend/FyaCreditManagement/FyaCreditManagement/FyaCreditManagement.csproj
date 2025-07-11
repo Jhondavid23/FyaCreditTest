@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>07a122d8-291a-4dab-b160-a7056b91e29e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FyaCreditManagement.BLL\FyaCreditManagement.BLL.csproj" />
+    <ProjectReference Include="..\FyaCreditManagement.DTO\FyaCreditManagement.DTO.csproj" />
+    <ProjectReference Include="..\FyaCreditManagement.IOC\FyaCreditManagement.IOC.csproj" />
+  </ItemGroup>
+
+</Project>
